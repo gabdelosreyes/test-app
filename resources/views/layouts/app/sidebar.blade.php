@@ -11,10 +11,21 @@
             </flux:sidebar.header>
 
             <flux:sidebar.nav>
-                <flux:sidebar.group :heading="__('Platform')" class="grid">
+                <flux:sidebar.group :heading="__('Menu')" class="grid">
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="user" :href="route('student.search')" :current="request()->routeIs('student.*')" wire:navigate>
+                        {{ __('Student Profile') }}
+                    </flux:sidebar.item>
+
+                    {{-- <flux:sidebar.group expandable heading="Student Profile"  :expanded="request()->routeIs('student.*')" class="grid">
+                        <flux:sidebar.item :href="route('student.search')" :current="request()->routeIs('student.search')">Update Information</flux:sidebar.item>
+                        <flux:sidebar.item href="#">Add/Drop/Change Subject</flux:sidebar.item>
+                        <flux:sidebar.item href="#">Print COG</flux:sidebar.item>
+                    </flux:sidebar.group> --}}
+
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
