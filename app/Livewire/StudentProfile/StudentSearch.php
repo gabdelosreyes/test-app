@@ -3,23 +3,31 @@
 namespace App\Livewire\StudentProfile;
 
 use Livewire\Component;
-use App\Models\StudentInformation;
+use Livewire\WithPagination;
+use App\Models\StudentProfile;
 
 class StudentSearch extends Component
 {
+    use WithPagination;
+
     public $search = '';
+
+    // Reset pagination when search changes
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
-        $students = collect();
-
-        if ($this->search !== '') {
-            $students = StudentInformation::query()
-                ->where('student_number', 'like', "%{$this->search}%")
-                ->orderBy('last_name')
-                ->get(); // all results, no pagination
-        }
+        $students = StudentProfile::with('information')
+            ->when($this->search !== '', function ($query) {
+                $query->where('student_number', 'like', "%{$this->search}%");
+            })
+            ->orderBy('program')
+            ->paginate(10);
 
         return view('livewire.student-profile.student-search', compact('students'));
     }
+
 }

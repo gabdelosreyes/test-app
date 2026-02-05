@@ -17,7 +17,7 @@ class StudentInformationFactory extends Factory
     public function definition(): array
     {
         return [
-            'student_number' => $this->faker->unique()->numerify('20261####'),
+            'student_number' => null,
 
             'first_name'  => $this->faker->firstName,
             'middle_name' => $this->faker->boolean(70) ? $this->faker->lastName : null,
@@ -50,29 +50,9 @@ class StudentInformationFactory extends Factory
                 null
             ]),
 
-            'guardian_name' => $this->faker->boolean(80)
-                ? $this->faker->name
-                : null,
-
-            'guardian_number' => $this->faker->boolean(80)
-                ? $this->faker->numerify('09#########')
-                : null,
-
-            'course_code' => $this->faker->randomElement([
-                'BSIT',
-                'BSCS',
-                'BSECE',
-                'BSBA',
-                'BSED'
-            ]),
-
-            'high_school' => $this->faker->boolean(80)
-                ? $this->faker->company . ' High School'
-                : null,
-
-            'year_admitted' => $this->faker->numberBetween(2010, 2026),
-
-            'sem_admitted' => $this->faker->randomElement(['FIRST', 'SECOND', 'SUMMER']),
+            'cvsu_email' => strtolower(
+                $this->faker->firstName . '.' . $this->faker->lastName
+            ) . '@cvsu.edu.ph',
         ];
     }
 }

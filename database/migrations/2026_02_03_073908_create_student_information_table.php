@@ -26,13 +26,10 @@ return new class extends Migration
             $table->string('religion')->nullable();
             $table->string('citizenship');
             $table->string('marital_status')->nullable();
-            $table->string('guardian_name')->nullable();
-            $table->string('guardian_number')->nullable();
-            $table->string('course_code');
-            $table->string('high_school')->nullable();
-            $table->year('year_admitted');
-            $table->string('sem_admitted');
+            $table->string('cvsu_email')->nullable();
             $table->timestamps();
+
+            $table->foreign('student_number')->references('student_number')->on('student_profiles')->onDelete('cascade');
         });
     }
 

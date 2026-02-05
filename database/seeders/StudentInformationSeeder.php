@@ -2,21 +2,22 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\StudentInformation;
 use Illuminate\Database\Seeder;
+use App\Models\StudentProfile;
+use App\Models\StudentInformation;
 
 class StudentInformationSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        StudentInformation::truncate();
+        StudentProfile::query()
+            ->select('student_number')
+            ->each(function ($profile) {
 
-        StudentInformation::factory()
-            ->count(5000) 
-            ->create();
+                StudentInformation::factory()->create([
+                    'student_number' => $profile->student_number,
+                ]);
+
+            });
     }
 }
