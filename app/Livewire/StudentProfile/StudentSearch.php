@@ -2,30 +2,24 @@
 
 namespace App\Livewire\StudentProfile;
 
-use App\Models\StudentInformation;
-use Illuminate\Support\Collection;
 use Livewire\Component;
+use App\Models\StudentInformation;
 
 class StudentSearch extends Component
 {
     public $search = '';
-    public $students;
-
-    public function mount()
-    {
-        $this->students = collect(); 
-    }
-
-    public function searchStudent()
-    {
-        $this->students = StudentInformation::query()
-            ->where('student_number', 'like', "%{$this->search}%")
-            ->orderBy('last_name')
-            ->get(); 
-    }
 
     public function render()
     {
-        return view('livewire.student-profile.student-search');
+        $students = collect();
+
+        if ($this->search !== '') {
+            $students = StudentInformation::query()
+                ->where('student_number', 'like', "%{$this->search}%")
+                ->orderBy('last_name')
+                ->get(); // all results, no pagination
+        }
+
+        return view('livewire.student-profile.student-search', compact('students'));
     }
 }
