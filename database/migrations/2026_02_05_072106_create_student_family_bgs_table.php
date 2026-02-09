@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('student_family_bgs', function (Blueprint $table) {
             $table->id();
-            $table->string('student_number');
-            $table->string('father_name');
-            $table->string('father_occupation');
-            $table->string('mother_name');
-            $table->string('mother_occupation');
+            $table->string('student_number')->unique();
+            $table->string('father_name')->nullable();
+            $table->string('father_occupation')->nullable();
+            $table->string('mother_name')->nullable();
+            $table->string('mother_occupation')->nullable();
             $table->timestamps();
 
             $table->foreign('student_number')->references('student_number')->on('student_profiles')->onDelete('cascade');

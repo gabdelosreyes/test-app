@@ -21,6 +21,15 @@ class StudentProfile extends Model
         );
     }
 
+    public function familyBg(): HasOne
+    {
+        return $this->hasOne(
+            StudentFamilyBg::class,
+            'student_number',
+            'student_number'
+        );
+    }
+
     protected $fillable = [
         'student_number',
         'program',

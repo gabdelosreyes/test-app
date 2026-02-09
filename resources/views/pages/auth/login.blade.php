@@ -55,5 +55,28 @@
                 <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
             </div>
         @endif
+
+        <flux:button
+            as="a"
+            href="{{ route('google.login') }}"
+            color="blue"
+            variant="primary"
+            class="flex items-center gap-2"
+        >
+            {{-- Google icon --}}
+            <svg class="w-5 h-5" viewBox="0 0 48 48" aria-hidden="true">
+                <path fill="yellow"
+                    d="M43.6 20.5H42V20H24v8h11.3C33.8 32.1 29.3 35 24 35
+                        c-6.1 0-11-4.9-11-11s4.9-11 11-11
+                        c2.8 0 5.4 1.1 7.4 2.9l5.7-5.7
+                        C33.6 6.1 28.1 4 24 4
+                        12.9 4 4 12.9 4 24s8.9 20 20 20
+                        20-8.9 20-20c0-1.2-.1-2.3-.4-3.5z"/>
+            </svg>
+
+            <span>Login with CvSU Gmail</span>
+        </flux:button>
+
+
     </div>
 </x-layouts::auth>

@@ -19,12 +19,12 @@
 
     @if($search !== '')
         @if($students->count())
-            <flux:table :paginate="$students" class="mt-5">
+            <flux:table :paginate="$students" class="mt-4">
                 <flux:table.columns>
                     <flux:table.column>Student Number</flux:table.column>
                     <flux:table.column>Full Name</flux:table.column>
                     <flux:table.column>Program</flux:table.column>
-                    <flux:table.column>Major</flux:table.column>
+                    <flux:table.column>Year Level</flux:table.column>
                     <flux:table.column>Actions</flux:table.column>
                 </flux:table.columns>
 
@@ -40,9 +40,17 @@
                                 {{ $student->program }}
                             </flux:table.cell>
                             <flux:table.cell>
-                                {{ $student->major }}
+                                {{ $student->year_level }}
                             </flux:table.cell>
-                            <flux:table.cell>View Actions</flux:table.cell>
+                            <flux:table.cell>
+                                <flux:dropdown>
+                                    <flux:button icon:trailing="chevron-down" size="sm">View Actions</flux:button>
+                                    <flux:menu>
+                                        <flux:menu.item icon="user-circle">View Student Information</flux:menu.item>
+                                        <flux:menu.item variant="danger" icon="trash">Delete</flux:menu.item>
+                                    </flux:menu>
+                                </flux:dropdown>
+                            </flux:table.cell>
                         </flux:table.row>
                     @endforeach
                 </flux:table.rows>
