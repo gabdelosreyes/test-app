@@ -1,20 +1,20 @@
-<div class="p-4">
+<div class="p-4 w-full max-w-6xl">
     <h1 class="text-xl font-bold mb-4">Student Profile Management</h1>
 
     <div class="flex items-end gap-2 mb-4">
         <flux:input
             label="Enter Student Number"
-            wire:model.defer="search"
+            wire:model.lazy="search"
             style="width:20rem"
         />
 
-        <flux:button
+        {{-- <flux:button
             variant="primary"
             color="green"
             wire:click="$refresh"
         >
             Search
-        </flux:button>
+        </flux:button> --}}
     </div>
 
     @if($search !== '')
@@ -44,9 +44,16 @@
                             </flux:table.cell>
                             <flux:table.cell>
                                 <flux:dropdown>
-                                    <flux:button icon:trailing="chevron-down" size="sm">View Actions</flux:button>
+                                    <flux:button icon:trailing="chevron-down" size="sm">
+                                    View Actions
+                                    </flux:button>
                                     <flux:menu>
-                                        <flux:menu.item icon="user-circle">View Student Information</flux:menu.item>
+                                        <flux:menu.item icon="user-circle" 
+                                            as="a"
+                                            href="{{ route('student.info', $student->student_number) }}"
+                                        >
+                                        View Student Information
+                                        </flux:menu.item>
                                         <flux:menu.item variant="danger" icon="trash">Delete</flux:menu.item>
                                     </flux:menu>
                                 </flux:dropdown>

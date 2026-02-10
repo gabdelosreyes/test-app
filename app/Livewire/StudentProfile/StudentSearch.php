@@ -12,7 +12,10 @@ class StudentSearch extends Component
 
     public $search = '';
 
-    // Reset pagination when search changes
+    protected $queryString = [
+        'search' => ['except' => ''],
+    ];
+
     public function updatingSearch()
     {
         $this->resetPage();

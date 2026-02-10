@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class StudentProfile extends Model
 {
@@ -25,6 +26,24 @@ class StudentProfile extends Model
     {
         return $this->hasOne(
             StudentFamilyBg::class,
+            'student_number',
+            'student_number'
+        );
+    }
+
+    public function guardian(): HasMany
+    {
+        return $this->hasMany(
+            StudentGuardian::class,
+            'student_number',
+            'student_number'
+        );
+    }
+
+    public function educAttainment(): HasMany
+    {
+        return $this->hasMany(
+            StudentEducAttainment::class,
             'student_number',
             'student_number'
         );

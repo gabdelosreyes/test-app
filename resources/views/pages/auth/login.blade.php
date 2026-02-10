@@ -56,16 +56,18 @@
             </div>
         @endif
 
+        <flux:separator text="OR" class="my-5"/>
+
         <flux:button
             as="a"
             href="{{ route('google.login') }}"
-            color="blue"
+            color="white"
             variant="primary"
             class="flex items-center gap-2"
         >
             {{-- Google icon --}}
-            <svg class="w-5 h-5" viewBox="0 0 48 48" aria-hidden="true">
-                <path fill="yellow"
+            <svg class="w-5 h-5" viewBox="0 0 45 48" aria-hidden="true">
+                <path fill="white"
                     d="M43.6 20.5H42V20H24v8h11.3C33.8 32.1 29.3 35 24 35
                         c-6.1 0-11-4.9-11-11s4.9-11 11-11
                         c2.8 0 5.4 1.1 7.4 2.9l5.7-5.7

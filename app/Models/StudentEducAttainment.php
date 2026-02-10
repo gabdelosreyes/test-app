@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class StudentEducAttainment extends Model
 {
+    use HasFactory;
+
     protected $table = 'student_educ_attainments';
 
     protected $fillable = [
