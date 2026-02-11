@@ -23,6 +23,7 @@ class StudentInformationFactory extends Factory
             'middle_name' => $this->faker->boolean(70) ? $this->faker->lastName : null,
             'last_name'   => $this->faker->lastName,
             'suffix'      => $this->faker->randomElement([null, 'Jr.', 'Sr.', 'III']),
+            'sex'      => $this->faker->randomElement(['Male', 'Female']),
 
             'province'     => $this->faker->state,
             'municipality' => $this->faker->city,
@@ -46,8 +47,9 @@ class StudentInformationFactory extends Factory
 
             'marital_status' => $this->faker->randomElement([
                 'Single',
+                'Engaged',
                 'Married',
-                null
+                'Widowed',
             ]),
 
             'cvsu_email' => strtolower(

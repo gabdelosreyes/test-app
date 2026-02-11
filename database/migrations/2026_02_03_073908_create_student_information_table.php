@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('middle_name')->nullable();
             $table->string('last_name');
             $table->string('suffix')->nullable();
+            $table->string('sex');
             $table->string('province');
             $table->string('municipality');
             $table->string('brgy');

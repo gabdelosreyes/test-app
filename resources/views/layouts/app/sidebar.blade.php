@@ -20,12 +20,6 @@
                         {{ __('Student Profile') }}
                     </flux:sidebar.item>
 
-                    {{-- <flux:sidebar.group expandable heading="Student Profile"  :expanded="request()->routeIs('student.*')" class="grid">
-                        <flux:sidebar.item :href="route('student.search')" :current="request()->routeIs('student.search')">Update Information</flux:sidebar.item>
-                        <flux:sidebar.item href="#">Add/Drop/Change Subject</flux:sidebar.item>
-                        <flux:sidebar.item href="#">Print COG</flux:sidebar.item>
-                    </flux:sidebar.group> --}}
-
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
@@ -46,6 +40,7 @@
 
 
         <!-- Mobile User Menu -->
+
         <flux:header class="lg:hidden">
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
@@ -101,6 +96,45 @@
         </flux:header>
 
         {{ $slot }}
+
+        <!-- Bootleg Toast -->
+
+        <div
+            x-data="{
+                show: false,
+                message: '',
+                type: 'success'
+            }"
+            x-on:toast.window="
+                message = $event.detail.message;
+                type = $event.detail.type ?? 'success';
+                show = true;
+                setTimeout(() => show = false, 3000);
+            "
+            x-show="show"
+            x-transition
+            class="fixed bottom-5 right-5 z-50"
+        >
+            <div
+                class="flex items-center gap-3 px-4 py-3 rounded shadow-lg text-white"
+                :class="{
+                    'bg-green-600': type === 'success',
+                    'bg-red-600': type === 'error',
+                    'bg-yellow-500': type === 'warning',
+                    'bg-blue-600': type === 'info',
+                }"
+            >
+                <!-- Icon -->
+                <span class="text-lg">
+                    <template x-if="type === 'success'">✅</template>
+                    <template x-if="type === 'error'">❌</template>
+                    <template x-if="type === 'warning'">⚠️</template>
+                    <template x-if="type === 'info'">ℹ️</template>
+                </span>
+
+                <span x-text="message" class="text-sm font-medium"></span>
+            </div>
+        </div>
 
         @fluxScripts
     </body>

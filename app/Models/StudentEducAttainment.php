@@ -21,6 +21,7 @@ class StudentEducAttainment extends Model
         'status',
         'year_started',
         'year_ended',
+        'year_graduated',
         'honors',
     ];
 }

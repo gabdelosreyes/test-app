@@ -51,6 +51,7 @@
                                         <flux:menu.item icon="user-circle" 
                                             as="a"
                                             href="{{ route('student.info', $student->student_number) }}"
+                                            x-on:click="sessionStorage.setItem('students_back_url', window.location.href)"
                                         >
                                         View Student Information
                                         </flux:menu.item>

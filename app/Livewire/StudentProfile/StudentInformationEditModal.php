@@ -16,14 +16,14 @@ class StudentInformationEditModal extends Component
         $this->show = true;
     }
     
-    public $show = false; // Controls modal visibility
-    public $student; // StudentInformation model
+    public $show = false; 
+    public $student; 
 
-    // Editable fields
     public $first_name;
     public $middle_name;
     public $last_name;
     public $suffix;
+    public $sex;
     public $birth_date;
     public $marital_status;
     public $religion;
@@ -38,6 +38,7 @@ class StudentInformationEditModal extends Component
         'middle_name' => 'nullable|string|max:255',
         'last_name' => 'required|string|max:255',
         'suffix' => 'nullable|string|max:10',
+        'sex' => 'required|string|max:255',
         'birth_date' => 'required|date',
         'marital_status' => 'nullable|string',
         'religion' => 'nullable|string',
@@ -52,12 +53,12 @@ class StudentInformationEditModal extends Component
     {
         $this->student = $student;
 
-        // Populate editable fields
         $this->fill([
             'first_name' => $student->first_name,
             'middle_name' => $student->middle_name,
             'last_name' => $student->last_name,
             'suffix' => $student->suffix,
+            'sex' => $student->sex,
             'birth_date' => $student->birth_date,
             'marital_status' => $student->marital_status,
             'religion' => $student->religion,
@@ -78,6 +79,7 @@ class StudentInformationEditModal extends Component
             'middle_name' => $this->middle_name,
             'last_name' => $this->last_name,
             'suffix' => $this->suffix,
+            'sex' => $this->sex,
             'birth_date' => $this->birth_date,
             'marital_status' => $this->marital_status,
             'religion' => $this->religion,
@@ -91,6 +93,11 @@ class StudentInformationEditModal extends Component
         $this->show = false;
 
         $this->dispatch('studentUpdated');
+
+        $this->dispatch('toast',
+            message: 'Student information updated successfully!',
+            type: 'success'
+        );
     }
 
     public function render()

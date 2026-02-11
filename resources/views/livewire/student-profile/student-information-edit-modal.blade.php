@@ -16,13 +16,22 @@
             <flux:input label="Suffix" wire:model.defer="suffix" />
         </div>
         <div>
+            <flux:select label="Sex Assigned at Birth" wire:model.defer="sex">
+                <flux:select.option value="">Select</flux:select.option>
+                <flux:select.option value="Male">Male</flux:select.option>
+                <flux:select.option value="Female">Female</flux:select.option>
+            </flux:select>
+        </div>
+        <div>
             <flux:input label="Birth Date" type="date" wire:model.defer="birth_date" />
         </div>
         <div>
             <flux:select label="Marital Status" wire:model.defer="marital_status">
                 <flux:select.option value="">Select</flux:select.option>
                 <flux:select.option value="Single">Single</flux:select.option>
+                <flux:select.option value="Engaged">Engaged</flux:select.option>
                 <flux:select.option value="Married">Married</flux:select.option>
+                <flux:select.option value="Widowed">Widowed</flux:select.option>
             </flux:select>
         </div>
         <div>

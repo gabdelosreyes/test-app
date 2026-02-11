@@ -27,6 +27,7 @@ class StudentInformation extends Model
         'middle_name',
         'last_name',
         'suffix',
+        'sex',
         'province',
         'municipality',
         'brgy',

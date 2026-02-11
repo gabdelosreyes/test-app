@@ -10,7 +10,7 @@ class StudentProfileSeeder extends Seeder
     public function run(): void
     {
         StudentProfile::factory()
-            ->count(5000) // adjust as needed
+            ->count(5000)
             ->create();
     }
 }

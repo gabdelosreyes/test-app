@@ -15,10 +15,9 @@ class StudentEducAttainmentFactory extends Factory
     
     public function definition(): array
     {
-        // Define common educational levels
         $levels = [
-            'Elementary',
-            'High School',
+            'Primary',
+            'Secondary',
             'Vocational',
             'College',
             'Graduate Studies'
@@ -26,17 +25,21 @@ class StudentEducAttainmentFactory extends Factory
 
         $level = $this->faker->randomElement($levels);
 
-        // Optional degree or field of study for non-elementary/high school
         $degree = null;
         $field = null;
 
-        if (in_array($level, ['College', 'Graduate Studies', 'Vocational'])) {
+        if (in_array($level, ['College', 'Graduate Studies'])) {
             $degree = $this->faker->randomElement(['Bachelor of Science', 'Bachelor of Arts', 'Master of Science', 'Master of Arts', 'Diploma']);
             $field  = $this->faker->randomElement(['Computer Science', 'Education', 'Engineering', 'Business Administration', 'Nursing']);
         }
 
+        if (in_array($level, ['Vocational'])) {
+            $degree = $this->faker->randomElement(['STEM', 'TVL', 'ABM']);
+        }
+
         $startYear = $this->faker->numberBetween(2000, 2018);
-        $endYear   = $startYear + $this->faker->numberBetween(3, 5); // typical duration
+        $endYear   = $startYear + $this->faker->numberBetween(3, 5);
+        $yearGraduated   = $endYear + $this->faker->numberBetween(1, 3);
 
         return [
             'student_number'    => StudentProfile::inRandomOrder()->value('student_number'), // link to existing students
@@ -48,6 +51,7 @@ class StudentEducAttainmentFactory extends Factory
             'status'            => $this->faker->randomElement(['Completed', 'Ongoing', 'Dropped']),
             'year_started'      => $startYear,
             'year_ended'        => $endYear,
+            'year_graduated'    => $yearGraduated,
             'honors'            => $this->faker->boolean(30) ? $this->faker->randomElement(['Cum Laude', 'Magna Cum Laude', 'Summa Cum Laude']) : null,
         ];
     }

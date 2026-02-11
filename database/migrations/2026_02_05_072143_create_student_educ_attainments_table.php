@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('status');
             $table->year('year_started');
             $table->year('year_ended');
+            $table->year('year_graduated');
             $table->string('honors')->nullable();
             $table->timestamps();
 

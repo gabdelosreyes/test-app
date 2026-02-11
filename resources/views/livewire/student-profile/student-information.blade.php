@@ -28,17 +28,22 @@
             </div>
 
             <div>
-                <strong>Birth Date</strong><br>
-                {{ $student->information?->birth_date }}
+                <strong>Sex Assigned at Birth</strong><br>
+                {{ $student->information?->sex }}
             </div>
 
             <div>
-                <strong>Marital Status</strong><br>
-                {{ na($student->information?->marital_status) }}
+                <strong>Birth Date</strong><br>
+                {{ $student->information?->birth_date }}
             </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 text-sm">
+            <div>
+                <strong>Marital Status</strong><br>
+                {{ na($student->information?->marital_status) }}
+            </div>
+
             <div>
                 <strong>Religion</strong><br>
                 {{ na($student->information?->religion) }}
@@ -48,7 +53,9 @@
                 <strong>Citizenship</strong><br>
                 {{ $student->information?->citizenship }}
             </div>
+        </div>
 
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 text-sm">
             <div>
                 <strong>Address</strong><br>
                 {{ collect([
@@ -65,16 +72,15 @@
         <flux:heading size="lg">Educational Attainment</flux:heading>
 
         @forelse($student->educAttainment as $attainment)
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 text-sm">
-
-                <div>
-                    <strong>School</strong><br>
-                    {{ $attainment->school_name }}
-                </div>
-
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4 text-sm">
                 <div>
                     <strong>Educational Level</strong><br>
                     {{ $attainment->educational_level }}
+                </div>
+                
+                <div>
+                    <strong>School</strong><br>
+                    {{ $attainment->school_name }}
                 </div>
 
                 {{-- Only show degree and field of study for College or Graduate Studies --}}
@@ -96,18 +102,23 @@
                 </div>
 
                 <div>
-                    <strong>Honors</strong><br>
-                    {{ na($attainment->honors) }}
-                </div>
-
-                <div>
                     <strong>Year Started</strong><br>
                     {{ $attainment->year_started }}
                 </div>
 
-                <div class="mb-5">
+                <div>
                     <strong>Year Ended</strong><br>
                     {{ $attainment->year_ended }}
+                </div>
+
+                <div>
+                    <strong>Year Graduated</strong><br>
+                    {{ $attainment->year_graduated }}
+                </div>
+
+                <div class> 
+                    <strong>Honors</strong><br>
+                    {{ na($attainment->honors) }}
                 </div>
 
             </div>
@@ -172,9 +183,11 @@
 
     <div class="mt-10 flex justify-start">
         <flux:button
-            as="a"
-            href="{{ url()->previous() }}"
             variant="outline"
+            x-on:click.prevent="
+                const back = sessionStorage.getItem('students_back_url');
+                back ? window.location.href = back : window.history.back();
+            "
         >
             ← Back to Results
         </flux:button>
