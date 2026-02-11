@@ -10,9 +10,8 @@
                 type="button"
                 variant="primary"
                 icon="pencil-square"
-                color="green"
                 size="sm"
-                wire:click="$dispatch('showModal')"
+                wire:click="$dispatch('showInfo')"
             >
                 Edit Personal Information
             </flux:button>
@@ -67,12 +66,36 @@
             </div>
         </div>
 
-        <flux:separator class="my-5"/>
+        <flux:separator class="my-6"/>
 
-        <flux:heading size="lg">Educational Attainment</flux:heading>
+        <div class="flex items-center justify-between">
+            <flux:heading size="lg">Educational Attainment</flux:heading>
+
+            <flux:button
+                size="sm"
+                icon="plus"
+                variant="primary"
+                wire:click.prevent="$dispatch('addStudentEducAttainment')"
+            >
+                Add Educational Attainment
+            </flux:button>
+
+        </div>
 
         @forelse($student->educAttainment as $attainment)
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4 text-sm">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 text-sm">
+                <div class="col-span-1 md:col-span-3 flex justify-end">
+                    <flux:button
+                        size="sm"
+                        variant="primary"
+                        color="blue"
+                        icon="pencil-square"
+                        wire:click.prevent="$dispatch('editStudentEducAttainment', '{{ $attainment->id }}')"
+                    >
+                        Edit Attainment
+                    </flux:button>
+                </div>
+                
                 <div>
                     <strong>Educational Level</strong><br>
                     {{ $attainment->educational_level }}
@@ -116,20 +139,41 @@
                     {{ $attainment->year_graduated }}
                 </div>
 
+                <div>
+                    <strong>Status</strong><br>
+                    {{ $attainment->status }}
+                </div>
+
                 <div class> 
                     <strong>Honors</strong><br>
                     {{ na($attainment->honors) }}
                 </div>
-
             </div>
+
+            @if (! $loop->last)
+                <hr class="my-6 border-t border-dashed border-gray-300">
+            @endif
         @empty
             <p class="text-gray-500 mt-4">No information available.</p>
         @endforelse
 
 
-        <flux:separator class="my-5"/>
+        <flux:separator class="my-6"/>
 
-        <flux:heading size="lg">Family Background</flux:heading>
+        <div class="flex items-center justify-between">
+            <flux:heading size="lg">Family Background</flux:heading>
+
+            <flux:button
+                type="button"
+                variant="primary"
+                icon="pencil-square"
+                color="green"
+                size="sm"
+                wire:click="$dispatch('showFamilyBg')"
+            >
+                Edit Family Background
+            </flux:button>
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-sm">
             <div>
@@ -155,12 +199,23 @@
             </div>
         </div>
 
-        <flux:separator class="my-5"/>
+        <flux:separator class="my-6"/>
 
-        <flux:heading size="lg">Guardian</flux:heading>
+        <div class="flex items-center justify-between">
+            <flux:heading size="lg">Guardian</flux:heading>
+
+            <flux:button
+                size="sm"
+                icon="plus"
+                variant="primary"
+                wire:click.prevent="$dispatch('addStudentGuardian')"
+            >
+                Add Guardian
+            </flux:button>
+        </div>
 
         @forelse($student->guardian as $guardian)
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 text-sm">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4 text-sm">
                 <div>
                     <strong>Guardian's Name</strong><br>
                     {{ $guardian->guardian_name }}
@@ -175,7 +230,24 @@
                     <strong>Contact Number</strong><br>
                     {{ $guardian->guardian_number }}
                 </div>
+                
+                <div>
+                    <flux:button
+                        size="sm"
+                        variant="primary"
+                        color="blue"
+                        icon="pencil-square"
+                        wire:click.prevent="$dispatch('editStudentGuardian', '{{ $guardian->id }}')"
+                    >
+                        Edit Guardian Info
+                    </flux:button>
+                </div>
+
             </div>
+
+            @if (! $loop->last)
+                <hr class="my-6 border-t border-dashed border-gray-300">
+            @endif
         @empty
             <p class="text-gray-500 mt-4">No information available.</p>
         @endforelse
@@ -199,4 +271,15 @@
         :student="$student->information"
     />
 
+    <livewire:student-profile.student-educ-attainment-edit-modal
+        :student_number="$student->student_number" 
+    />
+
+    <livewire:student-profile.student-family-bg-edit-modal
+        :familyBg="$student->familyBg"
+    />
+
+    <livewire:student-profile.student-guardian-edit-modal
+        :student_number="$student->student_number"
+    />
 </div>

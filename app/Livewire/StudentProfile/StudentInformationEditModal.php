@@ -8,10 +8,10 @@ use App\Models\StudentInformation;
 class StudentInformationEditModal extends Component
 {
     protected $listeners = [
-        'showModal' => 'openModal',
+        'showInfo' => 'openInfo',
     ];
 
-    public function openModal()
+    public function openInfo()
     {
         $this->show = true;
     }

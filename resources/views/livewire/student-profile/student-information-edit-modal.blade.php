@@ -1,7 +1,7 @@
 <flux:modal wire:model="show" title="Edit Personal Information" size="lg">
     <h2 class="text-md font-bold mb-4">Edit Personal Information</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         
         <div>
             <flux:input label="First Name" wire:model.defer="first_name" />
@@ -56,7 +56,7 @@
 
     <div class="mt-5 flex justify-end gap-2">
         <flux:button variant="outline" wire:click="$set('show', false)">Cancel</flux:button>
-        <flux:button color="green" wire:click="save">Save Changes</flux:button>
+        <flux:button variant="primary" color="green" wire:click="save">Save Changes</flux:button>
     </div>
 </flux:modal>
 
