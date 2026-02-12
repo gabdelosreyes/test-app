@@ -1,20 +1,14 @@
 <div class="p-4 w-full max-w-6xl">
     <h1 class="text-xl font-bold mb-4">Student Profile Management</h1>
 
-    <div class="flex items-end gap-2 mb-4">
+    <livewire:student-profile-table />
+    
+    {{-- <div class="flex items-end gap-2 mb-4">
         <flux:input
             label="Enter Student Number"
             wire:model.lazy="search"
             style="width:20rem"
         />
-
-        {{-- <flux:button
-            variant="primary"
-            color="green"
-            wire:click="$refresh"
-        >
-            Search
-        </flux:button> --}}
     </div>
 
     @if($search !== '')
@@ -66,5 +60,5 @@
         @else
             <p class="text-gray-500 mt-10 text-center">No results found.</p>
         @endif
-    @endif
+    @endif --}}
 </div>

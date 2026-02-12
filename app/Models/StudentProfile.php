@@ -17,8 +17,8 @@ class StudentProfile extends Model
     {
         return $this->hasOne(
             StudentInformation::class,
-            'student_number',   // FK on student_information
-            'student_number'    // PK on student_profiles
+            'student_number',   
+            'student_number'    
         );
     }
 
