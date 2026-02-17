@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Facades\Filter;
 use PowerComponents\LivewirePowerGrid\Facades\PowerGrid;
+use PowerComponents\LivewirePowerGrid\Facades\Rule;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 
 final class StudentProfileTable extends PowerGridComponent
 {
-    public string $tableName = 'StudentProfileTable';
+    public string $tableName = 'student-profile-table';
 
     public function setUp(): array
     {
@@ -22,9 +22,16 @@ final class StudentProfileTable extends PowerGridComponent
             PowerGrid::header()
                 ->showSearchInput()
                 ->showToggleColumns(),
+
             PowerGrid::footer()
                 ->showPerPage(10, [10, 25, 50, 100])
                 ->showRecordCount(),
+
+            // Add detail row setup
+            PowerGrid::detail()
+                ->view('components.student-profile-detail') // your blade for detail content
+                ->showCollapseIcon()
+                ->params([]), // optional extra params
         ];
     }
 
@@ -68,26 +75,19 @@ final class StudentProfileTable extends PowerGridComponent
             Column::make('Year Level', 'year_level')
                 ->sortable(),
 
-            Column::action('Actions')
+            Column::action('Actions') // toggle detail
         ];
     }
 
     public function actions(StudentProfile $row): array
     {
         return [
-            Button::add('view')
-                ->slot('View Info')
-                ->class('btn btn-sm btn-primary')
-                ->route('student.info', ['studentNumber' => $row->student_number])
-                ->attributes([
-                    'x-on:click' => "sessionStorage.setItem('students_back_url', window.location.href)"
-                ]),
-            
-            Button::add('delete')
-                ->slot('Delete')
-                ->class('btn btn-sm btn-danger')
-                ->dispatch('deleteStudent', ['student' => $row->student_number])
-                ->confirm('Are you sure you want to delete this student?')
+            Button::add('details')
+                ->slot('Details')
+                ->class('bg-green-600 text-white px-3 py-1 rounded-lg shadow hover:bg-green-700 transition')
+                ->toggleDetail($row->id),
         ];
     }
+
+
 }
